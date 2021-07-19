@@ -1,5 +1,6 @@
 class RecipesController < ApplicationController
   def show
+    byebug
     @recipe = Recipe.find(params[:id])
   end
 
@@ -9,17 +10,15 @@ class RecipesController < ApplicationController
 
   def new
     @recipe = Recipe.new
-    @recipe.ingredients.build
-    #@recipe.ingredients.build
-    #@recipe.ingredients.build(quantity: "1 cup")
-    #@recipe.ingredients.build(quantity: "1 tablespoon")
+    2.times do
+      @recipe.ingredients.build
+    end
   end
 
   def create
     @recipe = Recipe.create(recipe_params)
-    puts @recipe
-    puts recipe_params
-
+    @recipe.save
+    
     redirect_to recipe_path(@recipe)
   end
 
